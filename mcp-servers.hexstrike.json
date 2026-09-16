@@ -1,0 +1,24 @@
+[
+  {
+    "name": "hexstrike-catalog",
+    "transport": "stdio",
+    "command": "docker",
+    "args": [
+      "compose",
+      "-f",
+      "compose.hexstrike.yml",
+      "exec",
+      "-T",
+      "hexstrike",
+      "python3",
+      "-m",
+      "ctf_adapter.mcp_server",
+      "--profile",
+      "catalog"
+    ],
+    "allowed_tools": [
+      "tool_inventory"
+    ],
+    "notes": "OmniCTF catalog profile. The adapter registers only this reviewed profile and validates workbench paths and engagement scope."
+  }
+]

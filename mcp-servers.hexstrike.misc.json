@@ -1,0 +1,34 @@
+[
+  {
+    "name": "hexstrike-misc",
+    "transport": "stdio",
+    "command": "docker",
+    "args": [
+      "compose",
+      "-f",
+      "compose.hexstrike.yml",
+      "exec",
+      "-T",
+      "hexstrike",
+      "python3",
+      "-m",
+      "ctf_adapter.mcp_server",
+      "--profile",
+      "misc"
+    ],
+    "allowed_tools": [
+      "tool_inventory",
+      "file_identify",
+      "strings_extract",
+      "jq_query",
+      "sqlite_inspect",
+      "image_identify",
+      "ffprobe_analyze",
+      "ocr_extract",
+      "qr_decode",
+      "archive_inspect",
+      "scientific_python_run"
+    ],
+    "notes": "OmniCTF misc profile. The adapter registers only this reviewed profile and validates workbench paths and engagement scope."
+  }
+]

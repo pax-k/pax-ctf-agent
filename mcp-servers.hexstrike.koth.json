@@ -1,0 +1,29 @@
+[
+  {
+    "name": "hexstrike-koth",
+    "transport": "stdio",
+    "command": "docker",
+    "args": [
+      "compose",
+      "-f",
+      "compose.hexstrike.yml",
+      "exec",
+      "-T",
+      "hexstrike",
+      "python3",
+      "-m",
+      "ctf_adapter.mcp_server",
+      "--profile",
+      "koth"
+    ],
+    "allowed_tools": [
+      "tool_inventory",
+      "koth_snapshot",
+      "koth_prepare_patch",
+      "koth_apply_patch",
+      "koth_prepare_flag_submission",
+      "koth_submit_flag"
+    ],
+    "notes": "OmniCTF koth profile. The adapter registers only this reviewed profile and validates workbench paths and engagement scope."
+  }
+]

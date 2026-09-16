@@ -1,0 +1,6 @@
+fpylll==0.6.4
+hashpumpy==1.2
+pycryptodome==3.23.0
+sympy==1.14.0
+xortool==1.1.0
+z3-solver==5.1.0.0

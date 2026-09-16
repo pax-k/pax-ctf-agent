@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "baseImages": {
+    "python": "python@sha256:782412e85d0f0984994c290652577d4018aff08145c85b262bb63dc0c7522254",
+    "kali": "kalilinux/kali-rolling@sha256:49d174981a2a211e76acdde22a2e4978ea19bc0433487292cd9ad865da24ee42"
+  },
+  "sources": {
+    "hexstrike": "d689933ff579d839c676c82b231f8e98326c5f04",
+    "libc-database": "b7e948f7324cde8ac5cdb26bc4d58fbeeb1fbb5c",
+    "pwndbg": "0b59278b1189d3a0ff7f6a423c2f1fafa6bb1e9c",
+    "RsaCtfTool": "4475e1dd4431883e73e1418ef8e5d80bc7155467",
+    "bkcrack": "f7e61bab2dd5976e252d8451527c66a6342b68d2",
+    "outguess": "9901e486c506893f029fce654f21f59a76a4024d",
+    "waybackurls": "8d27cf3e3031de01179e8ba9127e968eb01008e9",
+    "gau": "8201b9d1febadba98e9cb81e3f253284e8a4a88b",
+    "foundry": "v1.8.3",
+    "echidna": "v2.3.3",
+    "agave": "v4.2.2",
+    "anchor": "v0.32.2",
+    "spl-token-cli": "5.6.1",
+    "solc": "0.8.30",
+    "dotnet-sdk": "8.0.425",
+    "ilspycmd": "11.0.0.9375",
+    "cfr": "0.152",
+    "micromamba": "2.9.0-0",
+    "sage": "10.9",
+    "z3-solver": "4.12.5.0"
+  },
+  "checksums": {
+    "cfr-0.152.jar": "f686e8f3ded377d7bc87d216a90e9e9512df4156e75b06c655a16648ae8765b2",
+    "dotnet-install.sh": "082f7685e156738a1b2e2ed8381a621870d4ce8e8c59278034556f05c186eb2e",
+    "foundry-linux-amd64": "7ca48e6ca3cac1bce1403ca67e5bc1dc3bc1fd818199c9957c7165079c228568",
+    "foundry-linux-arm64": "93fc23be26c8a902ca58fe54aa6ca28c880b58af95d052674933161df7928e6d",
+    "echidna-linux-amd64": "436d26cb5af34c6c525812b857ac53f218c7f6ad07d69495ef88bc4cdc85c764",
+    "echidna-linux-arm64": "a8853108ac57a43b550c8053dd1cd760fcc5347a9c4c389135fa0ae82a69a221",
+    "agave-linux-amd64": "5fc8684f7430038105fde953d4308ed56addf627f658daa61709f345448247ee",
+    "anchor-linux-amd64": "b3cdc15f3db924c2b11a7c16ceff21ad3da239ddde4e53f33df18e52e0461645",
+    "micromamba-linux-amd64": "366cd9cd8be14df1ab8ed50352a82111082a36686b2d389fdb79a92c3fafb3e3",
+    "micromamba-linux-arm64": "9f93b974adcb4d166996af969b6cd371287d1a3e52733704727884d9b74cb7a7",
+    "z3-solver-4.12.5.0.tar.gz": "9a84fcf2c6d39f640cd300e7fbe83dfbe10ef641b5d9134f9b6112237dd619bc"
+  },
+  "localPatches": [
+    {
+      "source": "z3-solver-4.12.5.0",
+      "reason": "Build the Mythril-pinned Z3 release with current Clang on both target architectures.",
+      "changes": [
+        "Disable Z3 link-time optimization.",
+        "Rename three stale linear-programming member references to their current declarations."
+      ],
+      "appliedBy": "container/hexstrike/install-source-tools.sh"
+    }
+  ],
+  "resolvedAtBuild": [
+    "/opt/ctf-adapter/dpkg-versions.txt",
+    "/opt/ctf-adapter/python-versions.txt",
+    "/opt/ctf-adapter/tool-smoke.txt"
+  ]
+}

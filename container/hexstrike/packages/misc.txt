@@ -1,0 +1,10 @@
+lua5.4
+nodejs
+npm
+php-cli
+python3-networkx
+python3-numpy
+python3-pandas
+python3-pil
+python3-scipy
+python3-sklearn

@@ -1,0 +1,40 @@
+[
+  {
+    "name": "hexstrike-reverse",
+    "transport": "stdio",
+    "command": "docker",
+    "args": [
+      "compose",
+      "-f",
+      "compose.hexstrike.yml",
+      "exec",
+      "-T",
+      "hexstrike",
+      "python3",
+      "-m",
+      "ctf_adapter.mcp_server",
+      "--profile",
+      "reverse"
+    ],
+    "allowed_tools": [
+      "tool_inventory",
+      "file_identify",
+      "strings_extract",
+      "binary_headers",
+      "objdump_disassemble",
+      "radare2_analyze",
+      "ghidra_decompile",
+      "capa_analyze",
+      "upx_test",
+      "angr_symbolic_execution",
+      "jadx_decompile",
+      "apktool_decode",
+      "dex2jar_convert",
+      "cfr_decompile",
+      "ilspy_decompile",
+      "wasm_decompile",
+      "python_bytecode_decompile"
+    ],
+    "notes": "OmniCTF reverse profile. The adapter registers only this reviewed profile and validates workbench paths and engagement scope."
+  }
+]

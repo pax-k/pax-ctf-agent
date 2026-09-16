@@ -1,0 +1,47 @@
+# Local runtimes and generated assessment output
+.hexstrike/
+strix_runs/
+hexstrike.log
+*.log
+
+# Engagements contain target, account, authorization, and evidence data.
+# Keep only the sanitized public example.
+engagements/*
+!engagements/example/
+!engagements/example/**
+
+# Private research and obsolete local experiments
+discussion.md
+hexstrike-localhost.patch
+
+# Credentials and local environment files
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+
+# Local tool, editor, and operating-system state
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage/
+
+# CTF artifacts and generated evidence. Keep only empty directory markers.
+workbench/input/*
+!workbench/input/.gitkeep
+workbench/output/*
+!workbench/output/.gitkeep

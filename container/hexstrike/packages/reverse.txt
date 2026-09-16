@@ -1,0 +1,9 @@
+apktool
+default-jre-headless
+dex2jar
+ghidra
+jadx
+radare2
+upx-ucl
+wabt
+yara

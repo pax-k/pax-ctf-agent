@@ -1,0 +1,27 @@
+[
+  {
+    "name": "hexstrike-web-gap",
+    "transport": "stdio",
+    "command": "docker",
+    "args": [
+      "compose",
+      "-f",
+      "compose.hexstrike.yml",
+      "exec",
+      "-T",
+      "hexstrike",
+      "python3",
+      "-m",
+      "ctf_adapter.mcp_server",
+      "--profile",
+      "web-gap"
+    ],
+    "allowed_tools": [
+      "tool_inventory",
+      "dns_lookup",
+      "waybackurls_discovery",
+      "gau_discovery"
+    ],
+    "notes": "OmniCTF web-gap profile. The adapter registers only this reviewed profile and validates workbench paths and engagement scope."
+  }
+]

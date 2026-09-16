@@ -1,0 +1,259 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "AGENTS.md"
+  ],
+  "skills": {
+    "paths": [
+      ".opencode/skills"
+    ]
+  },
+  "mcp": {
+    "hexstrike_reverse": {
+      "type": "local",
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "compose.hexstrike.yml",
+        "exec",
+        "-T",
+        "hexstrike",
+        "python3",
+        "-m",
+        "ctf_adapter.mcp_server",
+        "--profile",
+        "reverse"
+      ],
+      "enabled": false,
+      "timeout": 10000
+    },
+    "hexstrike_pwn": {
+      "type": "local",
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "compose.hexstrike.yml",
+        "exec",
+        "-T",
+        "hexstrike",
+        "python3",
+        "-m",
+        "ctf_adapter.mcp_server",
+        "--profile",
+        "pwn"
+      ],
+      "enabled": false,
+      "timeout": 10000
+    },
+    "hexstrike_forensics": {
+      "type": "local",
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "compose.hexstrike.yml",
+        "exec",
+        "-T",
+        "hexstrike",
+        "python3",
+        "-m",
+        "ctf_adapter.mcp_server",
+        "--profile",
+        "forensics"
+      ],
+      "enabled": false,
+      "timeout": 10000
+    },
+    "hexstrike_crypto": {
+      "type": "local",
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "compose.hexstrike.yml",
+        "exec",
+        "-T",
+        "hexstrike",
+        "python3",
+        "-m",
+        "ctf_adapter.mcp_server",
+        "--profile",
+        "crypto"
+      ],
+      "enabled": false,
+      "timeout": 10000
+    },
+    "hexstrike_osint": {
+      "type": "local",
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "compose.hexstrike.yml",
+        "exec",
+        "-T",
+        "hexstrike",
+        "python3",
+        "-m",
+        "ctf_adapter.mcp_server",
+        "--profile",
+        "osint"
+      ],
+      "enabled": false,
+      "timeout": 10000
+    },
+    "hexstrike_blockchain": {
+      "type": "local",
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "compose.hexstrike.yml",
+        "exec",
+        "-T",
+        "hexstrike",
+        "python3",
+        "-m",
+        "ctf_adapter.mcp_server",
+        "--profile",
+        "blockchain"
+      ],
+      "enabled": false,
+      "timeout": 10000
+    },
+    "hexstrike_misc": {
+      "type": "local",
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "compose.hexstrike.yml",
+        "exec",
+        "-T",
+        "hexstrike",
+        "python3",
+        "-m",
+        "ctf_adapter.mcp_server",
+        "--profile",
+        "misc"
+      ],
+      "enabled": false,
+      "timeout": 10000
+    },
+    "hexstrike_koth": {
+      "type": "local",
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "compose.hexstrike.yml",
+        "exec",
+        "-T",
+        "hexstrike",
+        "python3",
+        "-m",
+        "ctf_adapter.mcp_server",
+        "--profile",
+        "koth"
+      ],
+      "enabled": false,
+      "timeout": 10000
+    },
+    "hexstrike_web_gap": {
+      "type": "local",
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "compose.hexstrike.yml",
+        "exec",
+        "-T",
+        "hexstrike",
+        "python3",
+        "-m",
+        "ctf_adapter.mcp_server",
+        "--profile",
+        "web-gap"
+      ],
+      "enabled": false,
+      "timeout": 10000
+    },
+    "hexstrike_catalog": {
+      "type": "local",
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "compose.hexstrike.yml",
+        "exec",
+        "-T",
+        "hexstrike",
+        "python3",
+        "-m",
+        "ctf_adapter.mcp_server",
+        "--profile",
+        "catalog"
+      ],
+      "enabled": false,
+      "timeout": 10000
+    }
+  },
+  "permission": {
+    "skill": {
+      "*": "deny",
+      "penetration-testing-with-strix": "allow",
+      "mobile-*": "allow",
+      "ctf-*": "allow",
+      "ctf-pwn": "ask",
+      "ctf-koth": "ask",
+      "ctf-malware": "ask",
+      "cicd-*": "ask",
+      "github-actions-*": "ask",
+      "pwn-request": "ask",
+      "self-hosted-runner-poisoning": "ask"
+    },
+    "hexstrike_*": "deny",
+    "hexstrike_reverse_*": "ask",
+    "hexstrike_pwn_*": "ask",
+    "hexstrike_forensics_*": "ask",
+    "hexstrike_crypto_*": "ask",
+    "hexstrike_osint_*": "ask",
+    "hexstrike_blockchain_*": "ask",
+    "hexstrike_misc_*": "ask",
+    "hexstrike_koth_*": "ask",
+    "hexstrike_web_gap_*": "ask",
+    "hexstrike_catalog_*": "ask"
+  },
+  "agent": {
+    "orchestrator": {
+      "permission": {
+        "skill": {
+          "*": "deny",
+          "penetration-testing-with-strix": "allow",
+          "mobile-*": "allow",
+          "ctf-*": "allow",
+          "ctf-pwn": "ask",
+          "ctf-koth": "ask",
+          "ctf-malware": "ask",
+          "cicd-*": "ask",
+          "github-actions-*": "ask",
+          "pwn-request": "ask",
+          "self-hosted-runner-poisoning": "ask"
+        },
+        "hexstrike_*": "deny",
+        "hexstrike_reverse_*": "ask",
+        "hexstrike_pwn_*": "ask",
+        "hexstrike_forensics_*": "ask",
+        "hexstrike_crypto_*": "ask",
+        "hexstrike_osint_*": "ask",
+        "hexstrike_blockchain_*": "ask",
+        "hexstrike_misc_*": "ask",
+        "hexstrike_koth_*": "ask",
+        "hexstrike_web_gap_*": "ask",
+        "hexstrike_catalog_*": "ask"
+      }
+    }
+  }
+}

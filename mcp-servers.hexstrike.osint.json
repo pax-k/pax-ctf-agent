@@ -1,0 +1,32 @@
+[
+  {
+    "name": "hexstrike-osint",
+    "transport": "stdio",
+    "command": "docker",
+    "args": [
+      "compose",
+      "-f",
+      "compose.hexstrike.yml",
+      "exec",
+      "-T",
+      "hexstrike",
+      "python3",
+      "-m",
+      "ctf_adapter.mcp_server",
+      "--profile",
+      "osint"
+    ],
+    "allowed_tools": [
+      "tool_inventory",
+      "whois_lookup",
+      "dns_lookup",
+      "waybackurls_discovery",
+      "gau_discovery",
+      "maigret_search",
+      "sherlock_search",
+      "holehe_check",
+      "media_download"
+    ],
+    "notes": "OmniCTF osint profile. The adapter registers only this reviewed profile and validates workbench paths and engagement scope."
+  }
+]

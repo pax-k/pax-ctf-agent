@@ -1,0 +1,2 @@
+pwntools==4.15.0
+ROPGadget>=7,<8

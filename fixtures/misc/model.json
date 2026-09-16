@@ -1,0 +1,6 @@
+{
+  "format": "synthetic-linear-model",
+  "weights": [0.2, -0.1, 0.7],
+  "bias": 0.43,
+  "note": "Deterministic data-only AI/ML fixture"
+}

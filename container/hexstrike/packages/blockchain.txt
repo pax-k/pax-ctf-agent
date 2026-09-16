@@ -1,0 +1,15 @@
+autoconf
+automake
+clang
+cmake
+golang
+libclang-dev
+libffi-dev
+liblzma-dev
+libssl-dev
+libtool
+llvm
+ninja-build
+pkg-config
+rustc
+cargo

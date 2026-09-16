@@ -1,0 +1,46 @@
+[
+  {
+    "name": "hexstrike-forensics",
+    "transport": "stdio",
+    "command": "docker",
+    "args": [
+      "compose",
+      "-f",
+      "compose.hexstrike.yml",
+      "exec",
+      "-T",
+      "hexstrike",
+      "python3",
+      "-m",
+      "ctf_adapter.mcp_server",
+      "--profile",
+      "forensics"
+    ],
+    "allowed_tools": [
+      "tool_inventory",
+      "file_identify",
+      "strings_extract",
+      "binwalk_analyze",
+      "volatility3_analyze",
+      "foremost_carving",
+      "tshark_analyze",
+      "pcap_metadata",
+      "sleuthkit_analyze",
+      "ewf_analyze",
+      "bulk_extractor_analyze",
+      "exiftool_extract",
+      "steghide_analysis",
+      "zsteg_analysis",
+      "outguess_analysis",
+      "stegsnow_analysis",
+      "media_analyze",
+      "ffprobe_analyze",
+      "ocr_extract",
+      "qr_decode",
+      "pdf_analyze",
+      "ole_analyze",
+      "archive_inspect"
+    ],
+    "notes": "OmniCTF forensics profile. The adapter registers only this reviewed profile and validates workbench paths and engagement scope."
+  }
+]

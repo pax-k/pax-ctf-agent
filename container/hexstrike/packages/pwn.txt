@@ -1,0 +1,10 @@
+checksec
+gdb
+libc6-dbg
+ltrace
+patchelf
+qemu-user-static
+ropper
+ruby
+ruby-dev
+strace

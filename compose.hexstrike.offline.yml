@@ -1,0 +1,10 @@
+services:
+  hexstrike:
+    ports: !reset []
+    networks: !override
+      - hexstrike-offline
+
+networks:
+  hexstrike-offline:
+    driver: bridge
+    internal: true

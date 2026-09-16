@@ -1,0 +1,35 @@
+[
+  {
+    "name": "hexstrike-blockchain",
+    "transport": "stdio",
+    "command": "docker",
+    "args": [
+      "compose",
+      "-f",
+      "compose.hexstrike.yml",
+      "exec",
+      "-T",
+      "hexstrike",
+      "python3",
+      "-m",
+      "ctf_adapter.mcp_server",
+      "--profile",
+      "blockchain"
+    ],
+    "allowed_tools": [
+      "tool_inventory",
+      "file_identify",
+      "strings_extract",
+      "forge_test",
+      "cast_code",
+      "slither_analyze",
+      "echidna_fuzz",
+      "mythril_analyze",
+      "solc_compile",
+      "anchor_test",
+      "solana_validator_check",
+      "spl_token_check"
+    ],
+    "notes": "OmniCTF blockchain profile. The adapter registers only this reviewed profile and validates workbench paths and engagement scope."
+  }
+]

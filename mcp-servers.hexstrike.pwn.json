@@ -1,0 +1,39 @@
+[
+  {
+    "name": "hexstrike-pwn",
+    "transport": "stdio",
+    "command": "docker",
+    "args": [
+      "compose",
+      "-f",
+      "compose.hexstrike.yml",
+      "exec",
+      "-T",
+      "hexstrike",
+      "python3",
+      "-m",
+      "ctf_adapter.mcp_server",
+      "--profile",
+      "pwn"
+    ],
+    "allowed_tools": [
+      "tool_inventory",
+      "file_identify",
+      "strings_extract",
+      "binary_headers",
+      "checksec_analyze",
+      "gdb_pwndbg_debug",
+      "ropgadget_search",
+      "ropper_gadget_search",
+      "one_gadget_search",
+      "pwntools_exploit",
+      "patchelf_inspect",
+      "pwninit_setup",
+      "qemu_user_run",
+      "strace_trace",
+      "ltrace_trace",
+      "seccomp_analyze"
+    ],
+    "notes": "OmniCTF pwn profile. The adapter registers only this reviewed profile and validates workbench paths and engagement scope."
+  }
+]

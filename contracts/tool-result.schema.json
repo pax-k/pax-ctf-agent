@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omnictf.local/schemas/tool-result.schema.json",
+  "title": "OmniCTF tool result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "tool",
+    "toolVersion",
+    "category",
+    "asset",
+    "commandSummary",
+    "startedAt",
+    "durationMs",
+    "exitCode",
+    "timedOut",
+    "stdoutPath",
+    "stderrPath",
+    "createdArtifacts",
+    "artifactHashes",
+    "validationState"
+  ],
+  "properties": {
+    "tool": {"type": "string", "minLength": 1},
+    "toolVersion": {"type": "string", "minLength": 1},
+    "category": {"type": "string", "minLength": 1},
+    "asset": {"type": "string"},
+    "commandSummary": {"type": "array", "items": {"type": "string"}},
+    "startedAt": {"type": "string", "format": "date-time"},
+    "durationMs": {"type": "integer", "minimum": 0},
+    "exitCode": {"type": ["integer", "null"]},
+    "timedOut": {"type": "boolean"},
+    "stdoutPath": {"type": "string"},
+    "stderrPath": {"type": "string"},
+    "createdArtifacts": {"type": "array", "items": {"type": "string"}},
+    "artifactHashes": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+    },
+    "details": {"type": "object"},
+    "validationState": {
+      "enum": ["completed", "failed", "timed_out", "approval_required", "rejected"]
+    }
+  }
+}

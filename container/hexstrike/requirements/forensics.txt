@@ -1,0 +1,3 @@
+oletools==0.60.2
+pdfid==1.1.3
+volatility3>=2,<3
