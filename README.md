@@ -93,3 +93,7 @@ configuration files without building the optional lab image.
 
 The repository is prepared for source publication. Creating a GitHub
 repository, choosing its visibility, and pushing remain separate actions.
+
+Shouts to [OmniCTF](https://omnictf.com/),
+[Ambasada](http://ambasada.pro/), and
+[Formidable Builders](https://formidable.builders/).

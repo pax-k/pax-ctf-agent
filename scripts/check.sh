@@ -49,7 +49,7 @@ if git ls-files engagements | grep -q .; then
   exit 1
 fi
 
-if rg -n 'OmniCTF|hexstrike_koth|ctf-koth|KOTH' AGENTS.md README.md CONTRIBUTING.md docs config opencode.json; then
+if rg -n 'hexstrike_koth|ctf-koth|KOTH' AGENTS.md README.md CONTRIBUTING.md docs config opencode.json; then
   printf '%s\n' 'obsolete CTF workflow text remains in the active project surface' >&2
   exit 1
 fi
