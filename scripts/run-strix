@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+
+if [ "${1:-}" = -- ]; then
+  shift
+fi
+if [ "$#" -eq 0 ]; then
+  printf '%s\n' 'usage: ./scripts/run-strix -- <Strix arguments>' >&2
+  exit 64
+fi
+if ! command -v strix >/dev/null 2>&1; then
+  printf '%s\n' 'Strix is not installed' >&2
+  exit 1
+fi
+
+cd "$repo_dir"
+exec strix --mcp-config "$repo_dir/config/strix-hexstrike.json" --mcp-server hexstrike "$@"

@@ -1,101 +1,17 @@
-name: Validate OmniCTF workstation
+name: Validate configuration
 
 on:
   pull_request:
   push:
-    branches:
-      - main
+    branches: [main]
 
 permissions:
   contents: read
 
 jobs:
-  validate:
+  check:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-
-      - name: Validate contracts, fixtures, and private-path boundary
-        run: ./scripts/validate-release.sh
-
-      - name: Scan committed content for secrets
-        run: >-
-          docker run --rm
-          -v "${GITHUB_WORKSPACE}:/repo:ro"
-          ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:b109bc5f8f76a38196a3e413704fc5b9e3c32360bce4e4b603bd6f45b3721dbb
-          dir /repo --no-banner --redact
-
-  container:
-    name: Native ${{ matrix.arch }} image
-    needs: validate
-    runs-on: ${{ matrix.runner }}
-    timeout-minutes: 360
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - arch: amd64
-            platform: linux/amd64
-            runner: ubuntu-24.04
-          - arch: arm64
-            platform: linux/arm64
-            runner: ubuntu-24.04-arm
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-
-      - name: Reclaim ephemeral runner storage
-        run: |
-          sudo rm -rf \
-            /usr/local/lib/android \
-            /usr/local/.ghcup \
-            /opt/ghc \
-            /usr/share/dotnet \
-            /usr/local/share/powershell
-          docker system prune --all --force
-          available_kib=$(df --output=avail / | tail -1 | tr -d ' ')
-          minimum_kib=$((35 * 1024 * 1024))
-          if [ "$available_kib" -lt "$minimum_kib" ]; then
-            printf 'native image build needs at least 35 GiB free; runner has %s KiB\n' "$available_kib" >&2
-            exit 1
-          fi
-
-      - name: Build native image without publishing
-        run: >-
-          docker build
-          --platform "${{ matrix.platform }}"
-          --build-arg "TARGETARCH=${{ matrix.arch }}"
-          --tag "omnictf-hexstrike:${{ matrix.arch }}"
-          --file container/hexstrike/Dockerfile
-          .
-
-      - name: Verify resolved tool inventory
-        run: |
-          docker run --rm --entrypoint sh "omnictf-hexstrike:${{ matrix.arch }}" -lc \
-            'test ! -s /opt/ctf-adapter/tool-smoke.txt || ! grep -q "MISSING$" /opt/ctf-adapter/tool-smoke.txt'
-
-      - name: Generate SPDX SBOM
-        uses: anchore/sbom-action@f8bdd1d8ac5e901a77a92f111440fdb1b593736b
-        with:
-          image: omnictf-hexstrike:${{ matrix.arch }}
-          artifact-name: omnictf-hexstrike-${{ matrix.arch }}.spdx.json
-          format: spdx-json
-          upload-release-assets: false
-
-      - name: Scan image with Trivy
-        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25
-        with:
-          image-ref: omnictf-hexstrike:${{ matrix.arch }}
-          format: json
-          output: trivy-${{ matrix.arch }}.json
-          severity: HIGH,CRITICAL
-          ignore-unfixed: true
-          exit-code: 0
-
-      - name: Upload Trivy report
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: trivy-${{ matrix.arch }}
-          path: trivy-${{ matrix.arch }}.json
-          if-no-files-found: error
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Validate project configuration
+        run: ./scripts/check.sh

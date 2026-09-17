@@ -1,0 +1,52 @@
+#!/bin/sh
+set -eu
+
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+runtime_dir="$repo_dir/.hexstrike/native"
+pid_file="$runtime_dir/native.pid"
+compose_file="$repo_dir/extras/hexstrike-lab/compose.yml"
+hexstrike_port=${HEXSTRIKE_PORT:-8888}
+
+report_command() {
+  if command -v "$1" >/dev/null 2>&1; then
+    printf '%s: found\n' "$1"
+  else
+    printf '%s: missing\n' "$1"
+  fi
+}
+
+report_command git
+report_command python3
+report_command opencode
+report_command strix
+report_command docker
+
+if [ -x "$runtime_dir/venv/bin/python" ] && [ -f "$runtime_dir/hexstrike-ai/hexstrike_mcp.py" ]; then
+  printf '%s\n' 'native runtime: ready'
+else
+  printf '%s\n' 'native runtime: not set up'
+fi
+
+if [ -f "$pid_file" ] && kill -0 "$(cat "$pid_file")" 2>/dev/null; then
+  printf '%s\n' 'native process: running'
+else
+  printf '%s\n' 'native process: stopped'
+fi
+
+if command -v curl >/dev/null 2>&1 && curl --fail --silent --connect-timeout 1 --max-time 5 "http://127.0.0.1:$hexstrike_port/health" >/dev/null 2>&1; then
+  printf '%s\n' 'HexStrike health: reachable'
+else
+  printf '%s\n' 'HexStrike health: not reachable'
+fi
+
+if command -v docker >/dev/null 2>&1 && docker compose -f "$compose_file" ps --status running --services 2>/dev/null | grep -qx hexstrike; then
+  printf '%s\n' 'optional lab: running'
+else
+  printf '%s\n' 'optional lab: stopped'
+fi
+
+if command -v opencode >/dev/null 2>&1 && opencode debug config >/dev/null 2>&1; then
+  printf '%s\n' 'OpenCode configuration: valid'
+else
+  printf '%s\n' 'OpenCode configuration: unavailable or invalid'
+fi

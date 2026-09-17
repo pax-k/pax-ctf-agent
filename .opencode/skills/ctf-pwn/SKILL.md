@@ -11,8 +11,7 @@ metadata:
 
 ## Project safety boundary
 
-Use only challenge binaries and services named by the written engagement
-scope. Select `hexstrike-pwn`. Do not use proof code for persistence, real
+Use only supplied binaries and authorized services. Use native HexStrike. Do not use proof code for persistence, real
 credential access, denial of service, or third-party targets. Keep exploit
 scripts and complete output in the scoped workbench.
 
@@ -82,7 +81,7 @@ gem install one_gadget seccomp-tools
 
 - If you do not yet understand what the binary does, switch to `/ctf-reverse` before trying to exploit it.
 - If the service is really a restricted shell, encoding puzzle, or sandbox language challenge, switch to `/ctf-misc`.
-- If the exploit path depends on a web endpoint, session bug, or upload primitive more than memory corruption, switch to `/ctf-web`.
+- If the exploit path depends on a web endpoint, session bug, or upload primitive more than memory corruption, route that surface to Strix.
 - If the vulnerability requires breaking a cryptographic primitive before exploitation, switch to `/ctf-crypto`.
 
 ## Quick Start Commands

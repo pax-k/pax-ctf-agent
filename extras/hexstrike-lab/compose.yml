@@ -1,0 +1,50 @@
+name: hacking-workshop-hexstrike
+
+services:
+  hexstrike:
+    build:
+      context: ../..
+      dockerfile: extras/hexstrike-lab/image/Dockerfile
+      args:
+        HEXSTRIKE_REF: d689933ff579d839c676c82b231f8e98326c5f04
+    image: hacking-workshop/hexstrike-lab:d689933
+    init: true
+    restart: "no"
+    read_only: true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      HEXSTRIKE_HOST: 0.0.0.0
+      HEXSTRIKE_PORT: "8888"
+      HOME: /workbench/output/home
+      LAB_INPUT_ROOT: /workbench/input
+      LAB_OUTPUT_ROOT: /workbench/output
+    ports:
+      - "127.0.0.1:8888:8888"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - type: bind
+        source: ../../workbench/input
+        target: /workbench/input
+        read_only: true
+      - type: bind
+        source: ../../workbench/output
+        target: /workbench/output
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=2g
+      - /run:rw,nosuid,nodev,size=64m
+    networks:
+      - hexstrike-egress
+    pids_limit: 2048
+    stop_grace_period: 10s
+
+networks:
+  hexstrike-egress:
+    driver: bridge
+    internal: false

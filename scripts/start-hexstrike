@@ -1,0 +1,87 @@
+#!/bin/sh
+set -eu
+
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+runtime_dir="$repo_dir/.hexstrike/native"
+pid_file="$runtime_dir/native.pid"
+backend_file="$runtime_dir/backend"
+hexstrike_port=${HEXSTRIKE_PORT:-8888}
+native_url="http://127.0.0.1:$hexstrike_port/health"
+lab_compose="$repo_dir/extras/hexstrike-lab/compose.yml"
+
+usage() {
+  printf '%s\n' "usage: ./scripts/start-hexstrike [--lab]" >&2
+  exit 64
+}
+
+case "${1:-}" in
+  "") backend=native ;;
+  --lab) backend=lab ;;
+  *) usage ;;
+esac
+
+native_running() {
+  [ -f "$pid_file" ] && kill -0 "$(cat "$pid_file")" 2>/dev/null
+}
+
+lab_running() {
+  command -v docker >/dev/null 2>&1 && docker compose -f "$lab_compose" ps --status running --services 2>/dev/null | grep -qx hexstrike
+}
+
+native_healthy() {
+  command -v curl >/dev/null 2>&1 && curl --fail --silent --connect-timeout 1 --max-time 5 "$native_url" >/dev/null 2>&1
+}
+
+mkdir -p "$runtime_dir"
+if [ "$backend" = native ]; then
+  if lab_running; then
+    printf '%s\n' 'the optional lab backend is running; stop it before starting native HexStrike' >&2
+    exit 1
+  fi
+  if native_running; then
+    if native_healthy; then
+      printf 'native HexStrike is already healthy at http://127.0.0.1:%s\n' "$hexstrike_port"
+      exit 0
+    fi
+    printf '%s\n' 'the tracked native HexStrike process is unhealthy; stop it before retrying' >&2
+    exit 1
+  fi
+  if native_healthy; then
+    printf 'port %s is already serving an untracked process; do not start another backend\n' "$hexstrike_port" >&2
+    exit 1
+  fi
+  if [ ! -x "$runtime_dir/venv/bin/python" ] || [ ! -f "$runtime_dir/hexstrike-ai/hexstrike_server.py" ]; then
+    printf '%s\n' 'run ./scripts/setup before starting native HexStrike' >&2
+    exit 1
+  fi
+
+  nohup env HEXSTRIKE_PORT="$hexstrike_port" "$runtime_dir/venv/bin/python" "$repo_dir/scripts/hexstrike-server.py" >"$runtime_dir/native.log" 2>&1 &
+  server_pid=$!
+  printf '%s\n' "$server_pid" >"$pid_file"
+  printf '%s\n' native >"$backend_file"
+  attempt=1
+  while [ "$attempt" -le 60 ]; do
+    if native_healthy; then
+      printf 'native HexStrike is healthy at http://127.0.0.1:%s\n' "$hexstrike_port"
+      exit 0
+    fi
+    sleep 1
+    attempt=$((attempt + 1))
+  done
+  kill "$server_pid" 2>/dev/null || true
+  rm -f "$pid_file" "$backend_file"
+  printf '%s\n' 'native HexStrike did not become healthy; inspect .hexstrike/native.log' >&2
+  exit 1
+fi
+
+if native_running || native_healthy; then
+  printf '%s\n' 'native HexStrike is running; stop it before starting the optional lab' >&2
+  exit 1
+fi
+if ! command -v docker >/dev/null 2>&1 || ! docker compose version >/dev/null 2>&1; then
+  printf '%s\n' 'Docker Compose v2 is required for the optional lab backend' >&2
+  exit 1
+fi
+docker compose -f "$lab_compose" up -d --wait
+printf '%s\n' lab >"$backend_file"
+printf '%s\n' 'optional HexStrike lab is healthy at http://127.0.0.1:8888'

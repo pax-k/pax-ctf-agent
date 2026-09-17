@@ -11,7 +11,7 @@ metadata:
 
 ## Project safety boundary
 
-Use `hexstrike-osint` only for named subjects, targets, and public sources in
+Use native HexStrike only for named subjects, targets, and public sources in
 the engagement scope. Verify important claims with two independent sources
 when practical. Do not use purchased data, private accounts, impersonation, or
 attempts to bypass platform access controls.
@@ -46,7 +46,7 @@ brew install whois bind nmap exiftool imagemagick curl
 ## When to Pivot
 
 - If you already have the files or packets locally and now need extraction or carving, switch to `/ctf-forensics`.
-- If the task becomes active exploitation of a live HTTP service, switch to `/ctf-web`.
+- If the task becomes active assessment of a live HTTP service, route it to Strix.
 - If you uncover malware samples, beacons, or suspicious binaries during attribution, switch to `/ctf-malware`.
 
 ## Quick Start Commands

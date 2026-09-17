@@ -1,8 +1,0 @@
-{
-  "subject": "omnictf-fixture",
-  "claims": [
-    {"value": "example.com", "source": "fixture registration record"},
-    {"value": "Bucharest", "source": "fixture image caption"}
-  ],
-  "verification": "All data is synthetic. Do not pivot to real people."
-}

@@ -11,9 +11,9 @@ metadata:
 
 ## Project safety boundary
 
-Use only artifacts from `workbench/input` in an authorized engagement. Select
-the `hexstrike-reverse` profile and keep generated evidence in
-`workbench/output`. Treat execution and emulation of challenge code as
+Use only supplied artifacts in an authorized engagement. Use native HexStrike
+and keep generated output in `workbench/output`. Treat execution and emulation of
+challenge code as
 untrusted activity inside the isolated container.
 
 Quick reference for RE challenges. For detailed techniques, see supporting files.
@@ -73,7 +73,7 @@ r2pm -ci r2ghidra   # Native Ghidra decompiler for radare2
 
 - If you already understand the binary and now need heap, ROP, or kernel exploitation, switch to `/ctf-pwn`.
 - If the challenge is really about recovering deleted files, PCAP data, or disk artifacts, switch to `/ctf-forensics`.
-- If the target is a web app and you are only reversing a small client-side helper script, switch to `/ctf-web`.
+- If the target is a web application, route the application surface to Strix.
 - If the binary implements a machine learning model and the challenge is about model attacks or adversarial inputs, switch to `/ctf-ai-ml`.
 - If the reversed binary's core logic is a cryptographic algorithm or math problem, switch to `/ctf-crypto`.
 - If the binary is a real malware sample with C2, packing, or evasion behavior, switch to `/ctf-malware`.

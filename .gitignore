@@ -5,10 +5,7 @@ hexstrike.log
 *.log
 
 # Engagements contain target, account, authorization, and evidence data.
-# Keep only the sanitized public example.
 engagements/*
-!engagements/example/
-!engagements/example/**
 
 # Private research and obsolete local experiments
 discussion.md
@@ -40,7 +37,7 @@ __pycache__/
 .coverage
 coverage/
 
-# CTF artifacts and generated evidence. Keep only empty directory markers.
+# Local artifacts and generated output. Keep only empty directory markers.
 workbench/input/*
 !workbench/input/.gitkeep
 workbench/output/*

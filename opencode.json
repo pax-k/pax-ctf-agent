@@ -1,203 +1,21 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": [
-    "AGENTS.md"
-  ],
+  "instructions": ["AGENTS.md"],
   "skills": {
-    "paths": [
-      ".opencode/skills"
-    ]
+    "paths": [".opencode/skills"]
   },
   "mcp": {
-    "hexstrike_reverse": {
+    "hexstrike": {
       "type": "local",
-      "command": [
-        "docker",
-        "compose",
-        "-f",
-        "compose.hexstrike.yml",
-        "exec",
-        "-T",
-        "hexstrike",
-        "python3",
-        "-m",
-        "ctf_adapter.mcp_server",
-        "--profile",
-        "reverse"
-      ],
-      "enabled": false,
-      "timeout": 10000
+      "command": ["./scripts/hexstrike-mcp"],
+      "enabled": true,
+      "timeout": 30000
     },
-    "hexstrike_pwn": {
+    "hexstrike_lab": {
       "type": "local",
-      "command": [
-        "docker",
-        "compose",
-        "-f",
-        "compose.hexstrike.yml",
-        "exec",
-        "-T",
-        "hexstrike",
-        "python3",
-        "-m",
-        "ctf_adapter.mcp_server",
-        "--profile",
-        "pwn"
-      ],
+      "command": ["./scripts/hexstrike-lab-mcp"],
       "enabled": false,
-      "timeout": 10000
-    },
-    "hexstrike_forensics": {
-      "type": "local",
-      "command": [
-        "docker",
-        "compose",
-        "-f",
-        "compose.hexstrike.yml",
-        "exec",
-        "-T",
-        "hexstrike",
-        "python3",
-        "-m",
-        "ctf_adapter.mcp_server",
-        "--profile",
-        "forensics"
-      ],
-      "enabled": false,
-      "timeout": 10000
-    },
-    "hexstrike_crypto": {
-      "type": "local",
-      "command": [
-        "docker",
-        "compose",
-        "-f",
-        "compose.hexstrike.yml",
-        "exec",
-        "-T",
-        "hexstrike",
-        "python3",
-        "-m",
-        "ctf_adapter.mcp_server",
-        "--profile",
-        "crypto"
-      ],
-      "enabled": false,
-      "timeout": 10000
-    },
-    "hexstrike_osint": {
-      "type": "local",
-      "command": [
-        "docker",
-        "compose",
-        "-f",
-        "compose.hexstrike.yml",
-        "exec",
-        "-T",
-        "hexstrike",
-        "python3",
-        "-m",
-        "ctf_adapter.mcp_server",
-        "--profile",
-        "osint"
-      ],
-      "enabled": false,
-      "timeout": 10000
-    },
-    "hexstrike_blockchain": {
-      "type": "local",
-      "command": [
-        "docker",
-        "compose",
-        "-f",
-        "compose.hexstrike.yml",
-        "exec",
-        "-T",
-        "hexstrike",
-        "python3",
-        "-m",
-        "ctf_adapter.mcp_server",
-        "--profile",
-        "blockchain"
-      ],
-      "enabled": false,
-      "timeout": 10000
-    },
-    "hexstrike_misc": {
-      "type": "local",
-      "command": [
-        "docker",
-        "compose",
-        "-f",
-        "compose.hexstrike.yml",
-        "exec",
-        "-T",
-        "hexstrike",
-        "python3",
-        "-m",
-        "ctf_adapter.mcp_server",
-        "--profile",
-        "misc"
-      ],
-      "enabled": false,
-      "timeout": 10000
-    },
-    "hexstrike_koth": {
-      "type": "local",
-      "command": [
-        "docker",
-        "compose",
-        "-f",
-        "compose.hexstrike.yml",
-        "exec",
-        "-T",
-        "hexstrike",
-        "python3",
-        "-m",
-        "ctf_adapter.mcp_server",
-        "--profile",
-        "koth"
-      ],
-      "enabled": false,
-      "timeout": 10000
-    },
-    "hexstrike_web_gap": {
-      "type": "local",
-      "command": [
-        "docker",
-        "compose",
-        "-f",
-        "compose.hexstrike.yml",
-        "exec",
-        "-T",
-        "hexstrike",
-        "python3",
-        "-m",
-        "ctf_adapter.mcp_server",
-        "--profile",
-        "web-gap"
-      ],
-      "enabled": false,
-      "timeout": 10000
-    },
-    "hexstrike_catalog": {
-      "type": "local",
-      "command": [
-        "docker",
-        "compose",
-        "-f",
-        "compose.hexstrike.yml",
-        "exec",
-        "-T",
-        "hexstrike",
-        "python3",
-        "-m",
-        "ctf_adapter.mcp_server",
-        "--profile",
-        "catalog"
-      ],
-      "enabled": false,
-      "timeout": 10000
+      "timeout": 30000
     }
   },
   "permission": {
@@ -207,53 +25,30 @@
       "mobile-*": "allow",
       "ctf-*": "allow",
       "ctf-pwn": "ask",
-      "ctf-koth": "ask",
       "ctf-malware": "ask",
       "cicd-*": "ask",
       "github-actions-*": "ask",
       "pwn-request": "ask",
       "self-hosted-runner-poisoning": "ask"
     },
-    "hexstrike_*": "deny",
-    "hexstrike_reverse_*": "ask",
-    "hexstrike_pwn_*": "ask",
-    "hexstrike_forensics_*": "ask",
-    "hexstrike_crypto_*": "ask",
-    "hexstrike_osint_*": "ask",
-    "hexstrike_blockchain_*": "ask",
-    "hexstrike_misc_*": "ask",
-    "hexstrike_koth_*": "ask",
-    "hexstrike_web_gap_*": "ask",
-    "hexstrike_catalog_*": "ask"
-  },
-  "agent": {
-    "orchestrator": {
-      "permission": {
-        "skill": {
-          "*": "deny",
-          "penetration-testing-with-strix": "allow",
-          "mobile-*": "allow",
-          "ctf-*": "allow",
-          "ctf-pwn": "ask",
-          "ctf-koth": "ask",
-          "ctf-malware": "ask",
-          "cicd-*": "ask",
-          "github-actions-*": "ask",
-          "pwn-request": "ask",
-          "self-hosted-runner-poisoning": "ask"
-        },
-        "hexstrike_*": "deny",
-        "hexstrike_reverse_*": "ask",
-        "hexstrike_pwn_*": "ask",
-        "hexstrike_forensics_*": "ask",
-        "hexstrike_crypto_*": "ask",
-        "hexstrike_osint_*": "ask",
-        "hexstrike_blockchain_*": "ask",
-        "hexstrike_misc_*": "ask",
-        "hexstrike_koth_*": "ask",
-        "hexstrike_web_gap_*": "ask",
-        "hexstrike_catalog_*": "ask"
-      }
-    }
+    "hexstrike_*": "ask",
+    "hexstrike_lab_*": "ask",
+    "hexstrike_ai_*": "deny",
+    "hexstrike_bugbounty_*": "deny",
+    "hexstrike_execute_command": "deny",
+    "hexstrike_execute_python_script": "deny",
+    "hexstrike_install_python_package": "deny",
+    "hexstrike_create_file": "deny",
+    "hexstrike_modify_file": "deny",
+    "hexstrike_delete_file": "deny",
+    "hexstrike_advanced_payload_generation": "deny",
+    "hexstrike_create_attack_chain_ai": "deny",
+    "hexstrike_detect_technologies_ai": "deny",
+    "hexstrike_discover_attack_chains": "deny",
+    "hexstrike_generate_exploit_from_cve": "deny",
+    "hexstrike_intelligent_smart_scan": "deny",
+    "hexstrike_optimize_tool_parameters_ai": "deny",
+    "hexstrike_research_zero_day_opportunities": "deny",
+    "hexstrike_select_optimal_tools_ai": "deny"
   }
 }

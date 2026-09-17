@@ -11,7 +11,7 @@ metadata:
 
 ## Project safety boundary
 
-Use `hexstrike-forensics` for artifacts from `workbench/input`. Do not extract
+Use native HexStrike for supplied artifacts. Do not extract
 or retain real credentials or unrelated personal data. Store derived files in
 `workbench/output` and record whether each conclusion is metadata, recovered
 content, or independently validated evidence. Use the repository-native
@@ -66,7 +66,7 @@ gem install zsteg
 
 - If you recover an encrypted blob and the hard part becomes RSA, AES, or lattice work, switch to `/ctf-crypto`.
 - If the evidence really points to malware staging, beacon config extraction, or packed samples, switch to `/ctf-malware`.
-- If the artifact is a web app backup or API dump and the remaining problem is application logic, switch to `/ctf-web`.
+- If the artifact is a web app backup or API dump and the remaining problem is application logic, route that surface to Strix.
 - If the forensic evidence is really an encoding puzzle, steganography trick, or esoteric format rather than true forensics, switch to `/ctf-misc`.
 - If you need to trace infrastructure, attribute actors, or investigate public records from forensic findings, switch to `/ctf-osint`.
 - If the recovered artifact is a compiled binary or firmware that needs disassembly and analysis, switch to `/ctf-reverse`.

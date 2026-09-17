@@ -11,7 +11,7 @@ metadata:
 
 ## Project safety boundary
 
-Use this skill under the `hexstrike-misc` lane for supplied models and data.
+Use this skill with native HexStrike for supplied models and data.
 Do not upload challenge artifacts to external model or analysis services.
 Record model formats, hashes, and local tool versions in the evidence.
 

@@ -1,0 +1,97 @@
+#!/bin/sh
+set -eu
+
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+runtime_dir="$repo_dir/.hexstrike/native"
+source_dir="$runtime_dir/hexstrike-ai"
+venv_dir="$runtime_dir/venv"
+lock_file="$repo_dir/config/toolchain.lock.json"
+
+usage() {
+  printf '%s\n' "usage: ./scripts/setup [--lab]" >&2
+  exit 64
+}
+
+case "${1:-}" in
+  "") setup_lab=false ;;
+  --lab) setup_lab=true ;;
+  *) usage ;;
+esac
+
+need() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    printf 'missing required command: %s\n' "$1" >&2
+    exit 1
+  fi
+}
+
+need git
+need python3
+
+python3 - <<'PY'
+import sys
+if sys.version_info < (3, 10):
+    raise SystemExit("Python 3.10 or later is required")
+PY
+
+hexstrike_url=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8"))["hexstrike"]["repository"])' "$lock_file")
+hexstrike_revision=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8"))["hexstrike"]["revision"])' "$lock_file")
+
+mkdir -p "$runtime_dir"
+if [ -e "$source_dir" ]; then
+  if [ ! -d "$source_dir/.git" ]; then
+    printf 'existing HexStrike runtime is not a Git checkout: %s\n' "$source_dir" >&2
+    exit 1
+  fi
+  if [ "$(git -C "$source_dir" remote get-url origin)" != "$hexstrike_url" ]; then
+    printf 'existing HexStrike runtime uses a different upstream: %s\n' "$source_dir" >&2
+    exit 1
+  fi
+  if [ -n "$(git -C "$source_dir" status --porcelain)" ]; then
+    printf 'existing HexStrike runtime has local changes: %s\n' "$source_dir" >&2
+    exit 1
+  fi
+else
+  git init -q "$source_dir"
+  git -C "$source_dir" remote add origin "$hexstrike_url"
+fi
+
+if [ "$(git -C "$source_dir" rev-parse --verify HEAD 2>/dev/null || true)" != "$hexstrike_revision" ]; then
+  git -C "$source_dir" fetch --depth 1 origin "$hexstrike_revision"
+  git -C "$source_dir" checkout --detach -q FETCH_HEAD
+fi
+
+if [ ! -x "$venv_dir/bin/python" ]; then
+  python3 -m venv "$venv_dir"
+fi
+"$venv_dir/bin/python" -m pip install --quiet --upgrade pip
+"$venv_dir/bin/python" -m pip install --quiet -r "$repo_dir/requirements.hexstrike-core.txt"
+
+printf 'native HexStrike is ready at %s\n' "$source_dir"
+for optional_command in opencode strix; do
+  if command -v "$optional_command" >/dev/null 2>&1; then
+    printf '%s: found\n' "$optional_command"
+  else
+    printf '%s: not found; install it before using that workflow\n' "$optional_command"
+  fi
+done
+
+if [ "$setup_lab" = false ]; then
+  exit 0
+fi
+
+need docker
+if ! docker compose version >/dev/null 2>&1; then
+  printf '%s\n' 'Docker Compose v2 is required for the optional lab backend' >&2
+  exit 1
+fi
+
+available_kib=$(df -Pk "$repo_dir" | awk 'NR == 2 { print $4 }')
+minimum_kib=$((40 * 1024 * 1024))
+if [ -z "$available_kib" ] || [ "$available_kib" -lt "$minimum_kib" ]; then
+  printf '%s\n' 'the optional lab needs at least 40 GiB of free disk space' >&2
+  exit 1
+fi
+
+printf '%s\n' 'building the optional HexStrike lab image'
+docker compose -f "$repo_dir/extras/hexstrike-lab/compose.yml" build

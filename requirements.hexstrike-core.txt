@@ -1,13 +1,11 @@
-# HexStrike server and MCP runtime installed in the isolated container.
-# Specialist command-line tools are installed separately in the Dockerfile.
-# angr and pwntools are not exposed by the current narrow MCP profile.
-flask>=2.3,<4
-requests>=2.31,<3
-psutil>=5.9,<6
-fastmcp>=0.2,<1
-beautifulsoup4>=4.12,<5
-selenium>=4.15,<5
-webdriver-manager>=4,<5
-aiohttp>=3.8,<4
-mitmproxy>=9,<11
+# Native HexStrike runtime. These versions were tested with the pinned source.
+flask==3.0.3
+requests==2.34.2
+psutil==5.9.8
+fastmcp==0.4.1
+beautifulsoup4==4.15.0
+selenium==4.49.0
+webdriver-manager==4.1.2
+aiohttp==3.14.3
+mitmproxy==10.4.2
 bcrypt==4.0.1

@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+runtime_dir="$repo_dir/.hexstrike/native"
+hexstrike_port=${HEXSTRIKE_PORT:-8888}
+
+if [ ! -x "$runtime_dir/venv/bin/python" ] || [ ! -f "$runtime_dir/hexstrike-ai/hexstrike_mcp.py" ]; then
+  printf '%s\n' 'native HexStrike is not set up; run ./scripts/setup' >&2
+  exit 1
+fi
+
+exec "$runtime_dir/venv/bin/python" "$runtime_dir/hexstrike-ai/hexstrike_mcp.py" --server "http://127.0.0.1:$hexstrike_port"

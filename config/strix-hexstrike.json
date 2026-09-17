@@ -1,0 +1,24 @@
+[
+  {
+    "name": "hexstrike",
+    "transport": "stdio",
+    "command": "./scripts/hexstrike-mcp",
+    "args": [],
+    "allowed_tools": [
+      "server_health",
+      "httpx_probe",
+      "wafw00f_scan",
+      "api_schema_analyzer",
+      "api_fuzzer",
+      "graphql_scanner",
+      "jwt_analyzer",
+      "checkov_iac_scan",
+      "trivy_scan",
+      "kube_bench_cis",
+      "prowler_scan",
+      "scout_suite_assessment",
+      "cloudmapper_analysis"
+    ],
+    "notes": "Executor-only tools for a Strix-owned surface. Autonomous HexStrike planners, command execution, package installation, and file mutation are excluded."
+  }
+]

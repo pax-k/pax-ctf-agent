@@ -11,7 +11,7 @@ metadata:
 
 ## Project safety boundary
 
-Use `hexstrike-crypto` only for challenge material in the authorized scope.
+Use native HexStrike only for supplied artifacts in the authorized scope.
 Run expensive searches with an explicit bound and stop condition. Do not apply
 recovered credentials, keys, or tokens to systems outside the challenge.
 
@@ -71,7 +71,7 @@ brew install hashcat
 
 - If the real blocker is understanding a binary, obfuscated client, or weird VM, switch to `/ctf-reverse`.
 - If the challenge is mostly packet carving, disk recovery, or stego extraction before any decryption starts, switch to `/ctf-forensics`.
-- If the task is just implementing an exploit against a vulnerable network service after the crypto part is solved, switch to `/ctf-pwn` or `/ctf-web`.
+- If the task is just implementing an exploit against a vulnerable network service after the crypto part is solved, switch to `/ctf-pwn` or Strix.
 - If the crypto challenge involves adversarial ML, model extraction, or neural-network-based ciphers, switch to `/ctf-ai-ml`.
 - If the challenge is really an encoding puzzle, esoteric cipher, or polyglot trick rather than true cryptanalysis, switch to `/ctf-misc`.
 
