@@ -1,13 +1,13 @@
 ---
 name: ctf-pwn
-description: Provides binary exploitation techniques for CTF challenges. Use when you already have a vulnerable native target or service and need to turn memory corruption or low-level primitives into code execution or privilege escalation, such as buffer overflows, format strings, heap bugs, ROP, ret2libc, shellcode, kernel exploitation, seccomp bypass, sandbox escape, or Windows/Linux exploit chains. Do not use it when the main blocker is understanding what the binary does; use reverse engineering first. Do not use it for pure web bugs, disk or packet forensics, or standalone crypto/math challenges.
+description: Legacy category identifier for authorized binary exploitation. Use for supplied vulnerable native targets or services with memory-corruption or low-level primitives. Use reverse engineering first when the binary behavior is not understood.
 license: MIT
 allowed-tools: Bash Read Write Edit Glob Grep Task WebFetch WebSearch
 metadata:
   user-invocable: "false"
 ---
 
-# CTF Binary Exploitation (Pwn)
+# Binary exploitation
 
 ## Project safety boundary
 
@@ -15,7 +15,7 @@ Use only supplied binaries and authorized services. Use native HexStrike. Do not
 credential access, denial of service, or third-party targets. Keep exploit
 scripts and complete output in the scoped workbench.
 
-Quick reference for binary exploitation (pwn) CTF challenges. Each technique has a one-liner here; see supporting files for full details.
+Quick reference for binary exploitation. Each technique has a one-line summary; see supporting files for detail.
 
 ## Prerequisites
 

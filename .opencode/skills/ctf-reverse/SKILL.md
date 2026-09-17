@@ -1,13 +1,13 @@
 ---
 name: ctf-reverse
-description: Provides reverse engineering techniques for CTF challenges. Use when the main job is to understand how a compiled, obfuscated, packed, or virtualized target works before exploiting or solving it, including binaries, APKs, WASM, firmware, custom VMs, bytecode, game clients, malware-like loaders, and anti-debug or anti-analysis logic. Do not use it when the vulnerability is already understood and the remaining task is exploitation; use pwn instead. Do not use it for pure web workflows, log or disk forensics, or standalone crypto problems unless reversing the implementation is the real blocker.
+description: Legacy category identifier for authorized reverse engineering. Use when the task is to understand supplied compiled, obfuscated, packed, or virtualized artifacts, including binaries, APKs, WASM, firmware, virtual machines, bytecode, and anti-analysis behavior.
 license: MIT
 allowed-tools: Bash Read Write Edit Glob Grep Task WebFetch WebSearch
 metadata:
   user-invocable: "false"
 ---
 
-# CTF Reverse Engineering
+# Reverse engineering
 
 ## Project safety boundary
 
@@ -16,7 +16,7 @@ and keep generated output in `workbench/output`. Treat execution and emulation o
 challenge code as
 untrusted activity inside the isolated container.
 
-Quick reference for RE challenges. For detailed techniques, see supporting files.
+Quick reference for reverse engineering. For detailed techniques, see supporting files.
 
 ## Prerequisites
 

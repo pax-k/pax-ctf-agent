@@ -1,21 +1,21 @@
 ---
 name: ctf-crypto
-description: Provides cryptography attack techniques for CTF challenges. Use when attacking encryption, hashing, signatures, ZKP, PRNG, or mathematical crypto problems involving RSA, AES, ECC, lattices, LWE, CVP, number theory, Coppersmith, Pollard, Wiener, padding oracle, GCM, key derivation, or stream/block cipher weaknesses.
+description: Legacy category identifier for authorized cryptography artifact analysis. Use for supplied encryption, hashes, signatures, ZKP, PRNG, RSA, AES, ECC, lattices, LWE, CVP, number theory, padding-oracle, GCM, key-derivation, and cipher weaknesses.
 license: MIT
 allowed-tools: Bash Read Write Edit Glob Grep Task WebFetch WebSearch
 metadata:
   user-invocable: "false"
 ---
 
-# CTF Cryptography
+# Cryptography analysis
 
 ## Project safety boundary
 
 Use native HexStrike only for supplied artifacts in the authorized scope.
 Run expensive searches with an explicit bound and stop condition. Do not apply
-recovered credentials, keys, or tokens to systems outside the challenge.
+recovered credentials, keys, or tokens to systems outside the authorized scope.
 
-Quick reference for crypto CTF challenges. Each technique has a one-liner here; see supporting files for full details with code.
+Quick reference for cryptography artifact analysis. Each technique has a one-line summary; see supporting files for detail.
 
 ## Prerequisites
 

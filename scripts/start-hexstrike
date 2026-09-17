@@ -55,7 +55,7 @@ if [ "$backend" = native ]; then
     exit 1
   fi
 
-  nohup env HEXSTRIKE_PORT="$hexstrike_port" "$runtime_dir/venv/bin/python" "$repo_dir/scripts/hexstrike-server.py" >"$runtime_dir/native.log" 2>&1 &
+  nohup env PYTHONDONTWRITEBYTECODE=1 HEXSTRIKE_PORT="$hexstrike_port" "$runtime_dir/venv/bin/python" "$repo_dir/scripts/hexstrike-server.py" >"$runtime_dir/native.log" 2>&1 &
   server_pid=$!
   printf '%s\n' "$server_pid" >"$pid_file"
   printf '%s\n' native >"$backend_file"

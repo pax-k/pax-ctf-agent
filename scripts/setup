@@ -47,7 +47,8 @@ if [ -e "$source_dir" ]; then
     printf 'existing HexStrike runtime uses a different upstream: %s\n' "$source_dir" >&2
     exit 1
   fi
-  if [ -n "$(git -C "$source_dir" status --porcelain)" ]; then
+  runtime_changes=$(git -C "$source_dir" status --porcelain --untracked-files=all)
+  if printf '%s\n' "$runtime_changes" | grep -Ev '^\?\? ((.*/)?__pycache__/|.*\.(pyc|pyo|pyd)$)' | grep -q .; then
     printf 'existing HexStrike runtime has local changes: %s\n' "$source_dir" >&2
     exit 1
   fi
@@ -64,8 +65,8 @@ fi
 if [ ! -x "$venv_dir/bin/python" ]; then
   python3 -m venv "$venv_dir"
 fi
-"$venv_dir/bin/python" -m pip install --quiet --upgrade pip
-"$venv_dir/bin/python" -m pip install --quiet -r "$repo_dir/requirements.hexstrike-core.txt"
+PYTHONDONTWRITEBYTECODE=1 "$venv_dir/bin/python" -m pip install --quiet --upgrade pip
+PYTHONDONTWRITEBYTECODE=1 "$venv_dir/bin/python" -m pip install --quiet -r "$repo_dir/requirements.hexstrike-core.txt"
 
 printf 'native HexStrike is ready at %s\n' "$source_dir"
 for optional_command in opencode strix; do

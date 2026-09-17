@@ -1,13 +1,13 @@
 ---
 name: ctf-osint
-description: Provides open source intelligence techniques for CTF challenges. Use when gathering information from public sources, social media, geolocation, DNS records, username enumeration, reverse image search, Google dorking, Wayback Machine, Tor relays, FEC filings, or identifying unknown data like hashes and coordinates.
+description: Legacy category identifier for authorized open-source intelligence. Use for public-source research, geolocation, DNS records, reverse-image search, archive research, public filings, and identification of supplied hashes or coordinates.
 license: MIT
 allowed-tools: Bash Read Write Edit Glob Grep Task WebFetch WebSearch
 metadata:
   user-invocable: "false"
 ---
 
-# CTF OSINT
+# Open-source intelligence
 
 ## Project safety boundary
 
@@ -16,7 +16,7 @@ the engagement scope. Verify important claims with two independent sources
 when practical. Do not use purchased data, private accounts, impersonation, or
 attempts to bypass platform access controls.
 
-Quick reference for OSINT CTF challenges. Each technique has a one-liner here; see supporting files for full details.
+Quick reference for open-source intelligence. Each technique has a one-line summary; see supporting files for detail.
 
 ## Prerequisites
 

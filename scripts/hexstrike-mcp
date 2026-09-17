@@ -10,4 +10,4 @@ if [ ! -x "$runtime_dir/venv/bin/python" ] || [ ! -f "$runtime_dir/hexstrike-ai/
   exit 1
 fi
 
-exec "$runtime_dir/venv/bin/python" "$runtime_dir/hexstrike-ai/hexstrike_mcp.py" --server "http://127.0.0.1:$hexstrike_port"
+exec env PYTHONDONTWRITEBYTECODE=1 "$runtime_dir/venv/bin/python" "$runtime_dir/hexstrike-ai/hexstrike_mcp.py" --server "http://127.0.0.1:$hexstrike_port"

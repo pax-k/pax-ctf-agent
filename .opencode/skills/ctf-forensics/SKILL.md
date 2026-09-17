@@ -1,13 +1,13 @@
 ---
 name: ctf-forensics
-description: Provides digital forensics and signal analysis techniques for CTF challenges. Use when analyzing disk images, memory dumps, event logs, network captures, cryptocurrency transactions, steganography, PDF analysis, Windows registry, Volatility, PCAP, Docker images, coredumps, side-channel power traces, DTMF audio spectrograms, packet timing analysis, CD audio disc images, or recovering deleted files and credentials.
+description: Legacy category identifier for authorized digital forensics and signal analysis. Use for supplied disk images, memory dumps, event logs, network captures, steganography, PDF analysis, Windows registry, PCAP, container images, coredumps, and deleted-file recovery.
 license: MIT
 allowed-tools: Bash Read Write Edit Glob Grep Task WebFetch WebSearch
 metadata:
   user-invocable: "false"
 ---
 
-# CTF Forensics & Blockchain
+# Digital forensics
 
 ## Project safety boundary
 
@@ -17,7 +17,7 @@ or retain real credentials or unrelated personal data. Store derived files in
 content, or independently validated evidence. Use the repository-native
 `ctf-blockchain` skill for Blockchain challenges.
 
-Quick reference for forensics CTF challenges. Each technique has a one-liner here; see supporting files for full details.
+Quick reference for digital forensics. Each technique has a one-line summary; see supporting files for detail.
 
 ## Prerequisites
 

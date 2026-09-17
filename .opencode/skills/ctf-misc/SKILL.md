@@ -1,13 +1,13 @@
 ---
 name: ctf-misc
-description: Provides miscellaneous CTF challenge techniques for problems that do not cleanly fit the main categories. Use for encoding puzzles, pyjails, bash jails, RF/SDR, DNS oddities, unicode tricks, esoteric languages, QR or audio puzzles, constraint solving, game theory, unusual sandbox escapes, and hybrid logic puzzles. Prefer a more specific skill first when the challenge is mainly web, pwn, reverse, forensics, malware, OSINT, or crypto. Treat this as the fallback skill for genuine cross-category or edge-case challenges, not the default starting point.
+description: Legacy category identifier for authorized specialist artifact analysis that does not fit another category. Use for encoding, restricted-language artifacts, RF or SDR captures, DNS data, Unicode, QR or audio files, constraint solving, and hybrid artifacts. Prefer a specific category when possible.
 license: MIT
 allowed-tools: Bash Read Write Edit Glob Grep Task WebFetch WebSearch Skill
 metadata:
   user-invocable: "false"
 ---
 
-# CTF Miscellaneous
+# Miscellaneous artifact analysis
 
 ## Project safety boundary
 
@@ -15,7 +15,7 @@ Use native HexStrike for common media, encoding, jail, and AI/ML artifacts.
 Run supplied code only in the isolated container. A Misc label does not expand
 the written scope or permit destructive, persistent, or third-party actions.
 
-Quick reference for miscellaneous CTF challenges. Each technique has a one-liner here; see supporting files for full details.
+Quick reference for miscellaneous artifact analysis. Each technique has a one-line summary; see supporting files for detail.
 
 ## Prerequisites
 

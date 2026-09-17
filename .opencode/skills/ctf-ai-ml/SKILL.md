@@ -1,13 +1,13 @@
 ---
 name: ctf-ai-ml
-description: Provides AI and machine learning techniques for CTF challenges. Use when attacking ML models, crafting adversarial examples, performing model extraction, prompt injection, membership inference, training data poisoning, fine-tuning manipulation, neural network analysis, LoRA adapter exploitation, LLM jailbreaking, or solving AI-related puzzles.
+description: Legacy category identifier for authorized AI and machine-learning artifact analysis. Use for supplied models, model files, adversarial behavior, prompt injection, model extraction, membership inference, training-data poisoning, fine-tuning, neural-network analysis, and LoRA adapters.
 license: MIT
 allowed-tools: Bash Read Write Edit Glob Grep Task WebFetch WebSearch
 metadata:
   user-invocable: "false"
 ---
 
-# CTF AI/ML
+# AI and machine-learning analysis
 
 ## Project safety boundary
 
@@ -15,7 +15,7 @@ Use this skill with native HexStrike for supplied models and data.
 Do not upload challenge artifacts to external model or analysis services.
 Record model formats, hashes, and local tool versions in the evidence.
 
-Quick reference for AI/ML CTF challenges. Each technique has a one-liner here; see supporting files for full details.
+Quick reference for AI and machine-learning artifact analysis. Each technique has a one-line summary; see supporting files for detail.
 
 ## Prerequisites
 
