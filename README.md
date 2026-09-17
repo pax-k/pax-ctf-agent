@@ -1,6 +1,6 @@
-# Hacking Workshop
+# Pax CTF Agent
 
-Hacking Workshop gives OpenCode one local routing model for authorized
+Pax CTF Agent gives OpenCode one local routing model for authorized
 security work. It uses Strix for application assessments and HexStrike for
 specialist artifact work.
 
