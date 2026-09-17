@@ -18,6 +18,34 @@ OpenCode loads `ctf-router` first, then the relevant skill. The `ctf-*` names
 are stable skill identifiers. They describe categories and do not require a
 competition workflow.
 
+## Environment variables
+
+Self-hosted Strix assessments need an LLM model and its provider API key:
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `STRIX_LLM` | For self-hosted Strix | LiteLLM model identifier, for example `openai/gpt-5.4` |
+| `LLM_API_KEY` | For self-hosted Strix | API key for the provider selected by `STRIX_LLM` |
+| `HEXSTRIKE_PORT` | No | Local HexStrike port; defaults to `8888` |
+
+Create a local file from the safe example and replace its dummy values:
+
+```sh
+cp .env.example .env
+```
+
+The project scripts do not load `.env` automatically. Export its values into
+the current shell before you start OpenCode or run Strix:
+
+```sh
+set -a
+. ./.env
+set +a
+```
+
+Do not commit `.env` or real API keys. The managed Strix cloud workflow does
+not use `STRIX_LLM` or `LLM_API_KEY`.
+
 ## Routing
 
 | Work surface | Planner | HexStrike use |
