@@ -1,8 +1,9 @@
 # Pax CTF Agent
 
-Pax CTF Agent gives OpenCode one local routing model for authorized
-security work. It uses Strix for application assessments and HexStrike for
-specialist artifact work.
+Pax CTF Agent is a hacking agent built on OpenCode. It orchestrates Strix,
+HexStrike, and custom security skills to find and exploit vulnerabilities,
+pwn systems, analyze artifacts, and solve CTF challenges within an authorized
+scope.
 
 ## Quick start
 
